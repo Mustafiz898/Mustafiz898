@@ -12,10 +12,14 @@ Skills: MATLAB / Visio / Proteus / Multisim
 - 📫 How to reach me: Facebook. 
 
 
-[<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/github.svg' alt='github' height='40'>](https://github.com/https://github.com/Mustafiz898)  [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/facebook.svg' alt='facebook' height='40'>](https://www.facebook.com/https://www.facebook.com/mustafizurrahman.shuvo.71/)  
+[<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/github.svg' alt='github' height='40'>](https://github.com/Mustafiz898)  [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/facebook.svg' alt='facebook' height='40'>](https://www.facebook.com/https://www.facebook.com/mustafizurrahman.shuvo.71/)  
 
-![GitHub stats](https://github-readme-stats.vercel.app/api?username=https://github.com/Mustafiz898&show_icons=true)  
+<a href='https://docs.github.com/en/github/supporting-the-open-source-community-with-github-sponsors'><img src='https://raw.githubusercontent.com/acervenky/animated-github-badges/master/assets/sponsorbadge.gif' width='35' height='35'></a> 
 
-![GitHub streak stats](https://github-readme-streak-stats.herokuapp.com/?user=https://github.com/Mustafiz898)  
+[![trophy](https://github-profile-trophy.vercel.app/?username=Mustafiz898)](https://github.com/ryo-ma/github-profile-trophy)
 
-![Profile views](https://gpvc.arturio.dev/https://github.com/Mustafiz898)  
+![GitHub stats](https://github-readme-stats.vercel.app/api?username=Mustafiz898&show_icons=true)  
+
+![GitHub streak stats](https://github-readme-streak-stats.herokuapp.com/?user=Mustafiz898)  
+
+![Profile views](https://gpvc.arturio.dev/Mustafiz898)  
