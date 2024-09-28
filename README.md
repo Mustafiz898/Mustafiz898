@@ -2,10 +2,10 @@
 
 <p align="right"> <img src="https://komarev.com/ghpvc/?username=mustafiz898&label=Profile%20views&color=FF0000&style=flat" alt="mustafiz898" /> </p>
 <h1 align="center">
-    <img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=500&height=70&duration=4000&lines=Hi+There!+👋;+I'm+Mustafizur+Rahman!;" />
+    <img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=500&height=70&duration=4500&lines=Hi+There!+👋;+Coding+is+FUN!;" />
 </h1>
 
-<h3 align="center">SOFTWARE DEVELOPER</h3>
+<h3 align="center">🤖 SOFTWARE DEVELOPER 🤖</h3>
 
 <br/>
 
