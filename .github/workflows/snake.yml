@@ -29,7 +29,7 @@ jobs:
           github_user_name: Mustafiz898  # Your GitHub username
           outputs: "dist/snake.svg"
           color_snake: "#00ff00"  # Snake color (optional)
-          color_dots: "#b0b0b0"   # Dots color (optional)
+          color_dots: "#808080"   # Dots color (optional)
           color_background: "#808080"  # Gray background
 
       - name: Upload to repository
