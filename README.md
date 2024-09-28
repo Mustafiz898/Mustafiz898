@@ -57,11 +57,11 @@
 <h2 align="center">⚡ STATS ⚡</h2>
 <br>
 <div align="center">
-  <a href="https://git.io/streak-stats"><img  width="250"  src="https://streak-stats.demolab.com?user=Mustafiz898&theme=merko" alt="GitHub Streak" /></a>
+  <a href="https://git.io/streak-stats"><img  width="300"  src="https://streak-stats.demolab.com?user=Mustafiz898&theme=merko" alt="GitHub Streak" /></a>
   
-  <img width="250" src="https://github-readme-stats-salesp07.vercel.app/api?username=Mustafiz898&count_private=true&show_icons=true&theme=merko&rank_icon=github&border_radius=10" alt="readme stats" />
+  <img width="300" src="https://github-readme-stats-salesp07.vercel.app/api?username=Mustafiz898&count_private=true&show_icons=true&theme=merko&rank_icon=github&border_radius=10" alt="readme stats" />
   <br/>
-  <img width="200" align="center" src="https://github-readme-stats-salesp07.vercel.app/api/top-langs/?username=Mustafiz898&hide=HTML&langs_count=8&layout=compact&theme=merko&border_radius=10&size_weight=0.5&count_weight=0.5&exclude_repo=github-readme-stats" alt="top langs" />
+  <img width="300" align="center" src="https://github-readme-stats-salesp07.vercel.app/api/top-langs/?username=Mustafiz898&hide=HTML&langs_count=8&layout=compact&theme=merko&border_radius=10&size_weight=0.5&count_weight=0.5&exclude_repo=github-readme-stats" alt="top langs" />
 </div>
 
 
