@@ -45,7 +45,7 @@
 <br/>
 <hr/>
 <div align="center">
-  <h2>🐍 My Contributions 🐍</h2>
+  <h2>🐍 My CoNtRiBuTiOnS 🐍</h2>
   <br>
   <img alt="snake eating my contributions" src="https://raw.githubusercontent.com/Mustafiz898/Mustafiz898/output/github-contribution-grid-snake.svg" />
   
@@ -54,7 +54,7 @@
 
 <hr/>
 
-<h2 align="center">⚡ Stats ⚡</h2>
+<h2 align="center">⚡ STATS ⚡</h2>
 <br>
 <div align="center">
   <a href="https://git.io/streak-stats"><img  width="390"  src="https://streak-stats.demolab.com?user=Mustafiz898&theme=merko" alt="GitHub Streak" /></a>
