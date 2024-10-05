@@ -1,4 +1,4 @@
-![logo](https://github.com/Mustafiz898/Mustafiz898/blob/main/MFizBannar.png)
+![logo](https://github.com/Mustafiz898/Mustafiz898/blob/main/Banner2.png)
 
 <p align="right"> <img src="https://komarev.com/ghpvc/?username=mustafiz898&label=Profile%20views&color=FF0000&style=flat" alt="mustafiz898" /> </p>
 <h1 align="center">
