@@ -7,12 +7,28 @@
 
 ---
 
-## <p>💫 About Me</p>
-
+## 💫 About Me
+<table border ="0">
+<tr>
+<td width="70%">
+  
 Driven software developer with a passion for solving complex challenges and transforming ideas into effective, real-world solutions. Skilled in collaborating with diverse teams to create innovative, user-centered products that align with technical and business objectives.
+
+<br/>
 
 ![](https://img.shields.io/badge/Youtube-ea1010?style=for-the-badge&logo=youtube&link=https%3A%2F%2Fwww.youtube.com%2F%40CodeCraftWithFizz)
 ![](https://img.shields.io/badge/Linkedin-1055ea?style=for-the-badge&logo=linkedin&link=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fmustafizu42)
+
+</td>
+<td width="30%" align="center">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTQxcHk0ZHJsdmxwbGthMW9oOXBrOXF6NTlucmxlbzNiZHJpcmdoZiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/Y01wot3Bt9Bpdz8xvs/giphy.gif" 
+     alt="About Me GIF" width="60%"/>
+
+</td>
+</tr>
+</table>
+
 
 
 ## Language & Tools 
