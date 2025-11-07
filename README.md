@@ -34,10 +34,16 @@ Driven software developer with a passion for solving complex challenges and tran
 </p>
 
 ---
+### 📊 GitHub Stats & Top Languages
 
-## 📊 GitHub Stats  
-![Mustafiz898's Stats](https://github-readme-stats.vercel.app/api?username=Mustafiz898&theme=yeblu&show_icons=true&hide_border=false&count_private=true)
- <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Mustafiz898&layout=donut&theme=yeblu&hide_border=false&langs_count=10" alt="Top Languages Donut Chart" width="36%">
+
+  <img src="https://github-readme-stats.vercel.app/api?username=Mustafiz898&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&include_all_commits=true" 
+       alt="GitHub Stats" width="48%" style="display:inline-block;" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Mustafiz898&layout=donut&theme=tokyonight&hide_border=true&langs_count=10" 
+       alt="Top Languages Donut Chart" width="35%" style="display:inline-block;" />
+
+
+
 
 ---
 
