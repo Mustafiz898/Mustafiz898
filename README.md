@@ -40,7 +40,7 @@ Driven software developer with a passion for solving complex challenges and tran
   <img src="https://github-readme-stats.vercel.app/api?username=Mustafiz898&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&include_all_commits=true" 
        alt="GitHub Stats" width="48%" style="display:inline-block;" />
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Mustafiz898&layout=donut&theme=tokyonight&hide_border=true&langs_count=10" 
-       alt="Top Languages Donut Chart" width="35%" style="display:inline-block;" />
+       alt="Top Languages Donut Chart" width="32.5%" style="display:inline-block;" />
 
 
 
