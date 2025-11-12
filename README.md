@@ -39,7 +39,7 @@ I am Mustafizur Rahman, an experienced AI Trainer, Data Annotation Specialist, a
 </tr>
 </table>
 
- 
+ <br>
  
 <h2>Languages-Frameworks-Tools </h2>
 <br/>
@@ -49,8 +49,9 @@ I am Mustafizur Rahman, an experienced AI Trainer, Data Annotation Specialist, a
     <img src="https://skillicons.dev/icons?i=java,mysql,matlab,git,github" /><br>
     
 </div>
+<br>
 
-<h2 align="center">⚡ STATS ⚡</h2>
+<h2>⚡GITHUB STATS⚡</h2>
 <br>
 
 
@@ -65,18 +66,9 @@ I am Mustafizur Rahman, an experienced AI Trainer, Data Annotation Specialist, a
        alt="GitHub Stats" width="48%" style="display:inline-block;" />
 <img src="https://github-readme-stats-salesp07.vercel.app/api/top-langs/?username=Mustafiz898&layout=donut&theme=tokyonight&hide_border=true&langs_count=10" 
      alt="Top Languages Donut Chart" width="32.5%" style="display:inline-block;" />
-
-<br/>
-<div style="background-color:#0d1117; padding:20px; border-radius:15px; display:inline-block;">
-  <h2 style="color:#ffffff;">🐍 My CoNtRiBuTiOnS 🐍</h2>
-  <br>
-  <img src="https://raw.githubusercontent.com/Mustafiz898/Mustafiz898/output/github-contribution-grid-snake.svg" 
-       alt="Custom Contribution Snake" 
-       width="80%" 
-       style="border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);"/>
-  <br/>
 </div>
-
+<br/>
+<div> <h2>My CoNtRiBuTiOnS</h2> <img alt="snake eating my contributions" src="https://raw.githubusercontent.com/Mustafiz898/Mustafiz898/output/github-contribution-grid-snake.svg" alt="Custom Contribution Snake" width="80%" style="border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"/> <br/> </div>
 
 
 <hr/>
