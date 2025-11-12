@@ -2,7 +2,7 @@ name: Generate Snake
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Run daily
+    - cron: "0 0 * * *" # Runs daily
   workflow_dispatch:
   push:
     branches: [ main ]
@@ -12,32 +12,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repository
+      # 1️⃣ Checkout code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2️⃣ Generate snake SVGs
+      # 2️⃣ Generate snake SVGs to /tmp/dist (so we have permission)
       - name: Generate Snake SVG
         uses: Platane/snk@v3
         id: snake
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-            dist/github-contribution-grid-snake.svg?palette=github-light
+            /tmp/dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+            /tmp/dist/github-contribution-grid-snake.svg?palette=github-light
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 3️⃣ Copy SVGs to temp folder, modify, then overwrite safely
+      # 3️⃣ Add labels (now we have permission)
       - name: Add axis labels to SVGs
         run: |
-          mkdir -p tmp
-          cp dist/github-contribution-grid-snake-dark.svg tmp/dark.svg
-          cp dist/github-contribution-grid-snake.svg tmp/light.svg
-
           echo "✅ Adding labels..."
+          mkdir -p /tmp/final
 
-          for f in tmp/*.svg; do
+          for f in /tmp/dist/*.svg; do
+            fname=$(basename "$f")
             awk 'NR==2{
               print "<text x=\"20\" y=\"25\" fill=\"#8b949e\" font-size=\"10\">Mon</text>";
               print "<text x=\"20\" y=\"40\" fill=\"#8b949e\" font-size=\"10\">Wed</text>";
@@ -45,20 +43,15 @@ jobs:
               print "<text x=\"80\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Nov</text>";
               print "<text x=\"160\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Dec</text>";
               print "<text x=\"240\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Jan</text>";
-            }1' "$f" > "$f.tmp"
-            mv "$f.tmp" "$f"
+            }1' "$f" > "/tmp/final/$fname"
           done
 
-          # Replace originals (overwrite safely)
-          cp tmp/dark.svg dist/github-contribution-grid-snake-dark.svg
-          cp tmp/light.svg dist/github-contribution-grid-snake.svg
-
-      # 4️⃣ Push results
+      # 4️⃣ Publish new SVGs to the output branch
       - name: Push updated snake files
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
-          build_dir: dist
+          build_dir: /tmp/final
           commit_message: "update: snake graph with axis labels"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
