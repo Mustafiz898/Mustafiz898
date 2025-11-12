@@ -2,7 +2,7 @@ name: Generate Snake
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Run daily at midnight
+    - cron: "0 0 * * *" # Run daily
   workflow_dispatch:
   push:
     branches: [ main ]
@@ -16,52 +16,49 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2️⃣ Generate snake SVGs (dark & light)
+      # 2️⃣ Generate snake SVGs
       - name: Generate Snake SVG
         uses: Platane/snk@v3
         id: snake
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=#00FF00
-            dist/github-contribution-grid-snake.svg?palette=github-light&color_snake=#00AA00
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+            dist/github-contribution-grid-snake.svg?palette=github-light
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 3️⃣ Add axis labels safely (inside workspace)
-      - name: Add axis labels to SVG
+      # 3️⃣ Copy SVGs to temp folder, modify, then overwrite safely
+      - name: Add axis labels to SVGs
         run: |
-          DARK_SVG="dist/github-contribution-grid-snake-dark.svg"
-          LIGHT_SVG="dist/github-contribution-grid-snake.svg"
-          TMP_DARK="dist/snake_dark_tmp.svg"
-          TMP_LIGHT="dist/snake_light_tmp.svg"
+          mkdir -p tmp
+          cp dist/github-contribution-grid-snake-dark.svg tmp/dark.svg
+          cp dist/github-contribution-grid-snake.svg tmp/light.svg
 
-          # Make sure dist directory is writable
-          chmod -R 777 dist
+          echo "✅ Adding labels..."
 
-          # Add weekday and month labels to DARK SVG
-          awk 'NR==2{
-            print "<text x=\"20\" y=\"25\" fill=\"#8b949e\" font-size=\"10\">Mon</text>";
-            print "<text x=\"20\" y=\"40\" fill=\"#8b949e\" font-size=\"10\">Wed</text>";
-            print "<text x=\"20\" y=\"55\" fill=\"#8b949e\" font-size=\"10\">Fri</text>";
-            print "<text x=\"80\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Nov</text>";
-            print "<text x=\"160\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Dec</text>";
-            print "<text x=\"240\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Jan</text>";
-          }1' $DARK_SVG > $TMP_DARK
+          for f in tmp/*.svg; do
+            awk 'NR==2{
+              print "<text x=\"20\" y=\"25\" fill=\"#8b949e\" font-size=\"10\">Mon</text>";
+              print "<text x=\"20\" y=\"40\" fill=\"#8b949e\" font-size=\"10\">Wed</text>";
+              print "<text x=\"20\" y=\"55\" fill=\"#8b949e\" font-size=\"10\">Fri</text>";
+              print "<text x=\"80\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Nov</text>";
+              print "<text x=\"160\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Dec</text>";
+              print "<text x=\"240\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Jan</text>";
+            }1' "$f" > "$f.tmp"
+            mv "$f.tmp" "$f"
+          done
 
-          # Copy same changes to light version
-          cp $TMP_DARK $TMP_LIGHT
+          # Replace originals (overwrite safely)
+          cp tmp/dark.svg dist/github-contribution-grid-snake-dark.svg
+          cp tmp/light.svg dist/github-contribution-grid-snake.svg
 
-          # Replace originals
-          mv -f $TMP_DARK $DARK_SVG
-          mv -f $TMP_LIGHT $LIGHT_SVG
-
-      # 4️⃣ Push new files to output branch
+      # 4️⃣ Push results
       - name: Push updated snake files
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
           build_dir: dist
-          commit_message: "update: snake contribution graph with labels"
+          commit_message: "update: snake graph with axis labels"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
