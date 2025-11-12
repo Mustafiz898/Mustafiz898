@@ -1,10 +1,15 @@
+# ===========================
+# 🐍 Generate Snake Contribution Graph
+# ===========================
 name: Generate Snake
 
 on:
   schedule:
-    # Run every day at midnight
+    # Run daily at midnight
     - cron: "0 0 * * *"
+
   workflow_dispatch:
+
   push:
     branches:
       - main
@@ -14,9 +19,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Clone repository
       - name: Clone repository
         uses: actions/checkout@v3
 
+      # 2️⃣ Generate Snake SVGs
       - name: Generate Snake SVG
         uses: Platane/snk@v3
         id: snake
@@ -28,20 +35,31 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 🧩 Add labels (Months + Weekdays) manually into the SVG file
+      # 3️⃣ Add axis labels (months + weekdays)
       - name: Add axis labels to SVG
         run: |
           DARK_SVG="dist/github-contribution-grid-snake-dark.svg"
           LIGHT_SVG="dist/github-contribution-grid-snake.svg"
-          # Add Month Labels (roughly positioned)
-          sed -i '2i <text x="20" y="25" fill="#8b949e" font-size="10">Mon</text>' $DARK_SVG
-          sed -i '3i <text x="20" y="40" fill="#8b949e" font-size="10">Wed</text>' $DARK_SVG
-          sed -i '4i <text x="20" y="55" fill="#8b949e" font-size="10">Fri</text>' $DARK_SVG
-          sed -i '5i <text x="80" y="15" fill="#8b949e" font-size="10">Nov</text>' $DARK_SVG
-          sed -i '6i <text x="160" y="15" fill="#8b949e" font-size="10">Dec</text>' $DARK_SVG
-          sed -i '7i <text x="240" y="15" fill="#8b949e" font-size="10">Jan</text>' $DARK_SVG
+          TMP="/tmp/snake_tmp.svg"
+
+          # Copy file to a writable temporary location
+          cp $DARK_SVG $TMP
+
+          # Add weekday labels (Mon, Wed, Fri)
+          sed '2i <text x="20" y="25" fill="#8b949e" font-size="10">Mon</text>' $TMP > ${TMP}_1 && mv ${TMP}_1 $TMP
+          sed '3i <text x="20" y="40" fill="#8b949e" font-size="10">Wed</text>' $TMP > ${TMP}_1 && mv ${TMP}_1 $TMP
+          sed '4i <text x="20" y="55" fill="#8b949e" font-size="10">Fri</text>' $TMP > ${TMP}_1 && mv ${TMP}_1 $TMP
+
+          # Add month labels (manually positioned)
+          sed '5i <text x="80" y="15" fill="#8b949e" font-size="10">Nov</text>' $TMP > ${TMP}_1 && mv ${TMP}_1 $TMP
+          sed '6i <text x="160" y="15" fill="#8b949e" font-size="10">Dec</text>' $TMP > ${TMP}_1 && mv ${TMP}_1 $TMP
+          sed '7i <text x="240" y="15" fill="#8b949e" font-size="10">Jan</text>' $TMP > ${TMP}_1 && mv ${TMP}_1 $TMP
+
+          # Move back to dist and copy for light version
+          mv $TMP $DARK_SVG
           cp $DARK_SVG $LIGHT_SVG
 
+      # 4️⃣ Publish SVGs to output branch
       - name: Push new files to output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
