@@ -57,12 +57,20 @@
 
 <h2 align="center">⚡ STATS ⚡</h2>
 <br>
+
+
 <div align="center">
-  <a href="https://git.io/streak-stats"><img  width="370"  src="https://streak-stats.demolab.com?user=Mustafiz898&theme=merko" alt="GitHub Streak" /></a>
+ <img 
+       src="https://github-readme-streak-stats.herokuapp.com?user=Mustafiz898&theme=tokyonight&hide_border=true&date_format=M%20j%5B%2C%20Y%5D" 
+       alt="GitHub Streak" 
+       width="450px" 
+  />
   
-  <img width="370" src="https://github-readme-stats-salesp07.vercel.app/api?username=Mustafiz898&count_private=true&show_icons=true&theme=merko&rank_icon=github&border_radius=10" alt="readme stats" />
-  <br/>
-  <img width="325" align="center" src="https://github-readme-stats-salesp07.vercel.app/api/top-langs/?username=Mustafiz898&hide=HTML&langs_count=8&layout=compact&theme=merko&border_radius=10&size_weight=0.5&count_weight=0.5&exclude_repo=github-readme-stats" alt="top langs" />
+ <img src="https://github-readme-stats.vercel.app/api?username=Mustafiz898&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&include_all_commits=true" 
+       alt="GitHub Stats" width="48%" style="display:inline-block;" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Mustafiz898&layout=donut&theme=tokyonight&hide_border=true&langs_count=10" 
+       alt="Top Languages Donut Chart" width="32.5%" style="display:inline-block;" />
+
 </div>
 
 
@@ -70,6 +78,5 @@
 
 <hr/>
 
-<br/>
 
-<br/>
+
