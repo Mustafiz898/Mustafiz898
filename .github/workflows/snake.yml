@@ -1,66 +1,105 @@
+# GitHub Action for generating a contribution graph with a snake eating your contributions.
+
 name: Generate Snake
 
-on:
-  schedule:
-    - cron: "0 0 * * *" # Runs daily
-  workflow_dispatch:
-  push:
-    branches: [ main ]
 
-permissions:
-  contents: write
+
+# Controls when the action will run.
+
+on:
+
+  schedule:
+
+    # every 6 hours
+
+    - cron: "0 */6 * * *"
+
+
+
+  # This command allows us to run the Action automatically from the Actions tab.
+
+  workflow_dispatch:
+
+  
+
+  # Also run on every push on the main branch
+
+  push:
+
+    branches:
+
+    - main
+
+
+
+# The sequence of runs in this workflow:
 
 jobs:
+
+  # This workflow contains a single job called "build"
+
   build:
+
+    # The type of runner that the job will run on
+
     runs-on: ubuntu-latest
 
+
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+
     steps:
-      - name: Checkout repository
+
+      - name: Clone repo
+
         uses: actions/checkout@v3
 
-      - name: Generate Snake SVG
+    
+
+      - name: Generate the snake files in './dist/'
+
         uses: Platane/snk@v3
-        id: snake
+
+        id: snake-gif
+
         with:
+
           github_user_name: ${{ github.repository_owner }}
+
           outputs: |
-            /tmp/dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-            /tmp/dist/github-contribution-grid-snake.svg?palette=github-light
+
+            dist/github-contribution-grid-snake.svg
+
+            # *** FIX: Added show_axis_labels=true to the URL as a query parameter ***
+
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark&show_axis_labels=true
+
+            dist/github-contribution-grid-snake.gif?color_snake=#00ff00&color_dots=#00ff00,#00ff00,#00ff00,#00ff00,#00ff00
+
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Debug: list /tmp/dist
-        run: |
-          echo "Contents of /tmp/dist"
-          ls -la /tmp/dist || true
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Add axis labels to SVGs
-        run: |
-          echo "✅ Adding labels..."
-          mkdir -p /tmp/final
 
-          for f in /tmp/dist/*.svg; do
-            fname=$(basename "$f")
-            awk 'NR==2{
-              print "<text x=\"20\" y=\"25\" fill=\"#8b949e\" font-size=\"10\">Mon</text>";
-              print "<text x=\"20\" y=\"40\" fill=\"#8b949e\" font-size=\"10\">Wed</text>";
-              print "<text x=\"20\" y=\"55\" fill=\"#8b949e\" font-size=\"10\">Fri</text>";
-              print "<text x=\"80\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Nov</text>";
-              print "<text x=\"160\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Dec</text>";
-              print "<text x=\"240\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Jan</text>";
-            }1' "$f" > "/tmp/final/$fname"
-          done
 
-      - name: Debug: list /tmp/final
-        run: |
-          echo "Contents of /tmp/final"
-          ls -la /tmp/final || true
+      - name: Show build status
 
-      - name: Push updated snake files
+        run: git status
+
+
+
+      - name: Push new files to the output branch
+
         uses: crazy-max/ghaction-github-pages@v3.1.0
+
         with:
+
           target_branch: output
-          build_dir: /tmp/final
-          commit_message: "update: snake graph with axis labels"
+
+          build_dir: dist
+
+          commit_message: Update snake animations
+
         env:
+
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
