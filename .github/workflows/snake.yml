@@ -7,7 +7,6 @@ on:
   push:
     branches: [ main ]
 
-# Give this workflow permission to write repository contents so GITHUB_TOKEN can push
 permissions:
   contents: write
 
@@ -16,11 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2️⃣ Generate snake SVGs to /tmp/dist (so we have permission)
       - name: Generate Snake SVG
         uses: Platane/snk@v3
         id: snake
@@ -32,13 +29,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # debug: list generated files so it's easy to spot generation problems
       - name: Debug: list /tmp/dist
         run: |
           echo "Contents of /tmp/dist"
           ls -la /tmp/dist || true
 
-      # 3️⃣ Add labels (now we have permission)
       - name: Add axis labels to SVGs
         run: |
           echo "✅ Adding labels..."
@@ -56,32 +51,16 @@ jobs:
             }1' "$f" > "/tmp/final/$fname"
           done
 
-      # debug: list final files
       - name: Debug: list /tmp/final
         run: |
           echo "Contents of /tmp/final"
           ls -la /tmp/final || true
 
-      # 4️⃣ Publish new SVGs to the output branch
-      - name: Push updated snake files (using GITHUB_TOKEN)
+      - name: Push updated snake files
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
           build_dir: /tmp/final
           commit_message: "update: snake graph with axis labels"
         env:
-          # Preferred: use GITHUB_TOKEN (works if permissions: contents: write is set and branch protection allows it)
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Alternative: If branch protection prevents the GITHUB_TOKEN from pushing, use a PAT
-      # - create a personal access token with repo scope and save as secret REPO_WRITE_TOKEN
-      # - uncomment the following step and comment out the step above
-      #
-      # - name: Push updated snake files (using PAT)
-      #   uses: crazy-max/ghaction-github-pages@v3.1.0
-      #   with:
-      #     target_branch: output
-      #     build_dir: /tmp/final
-      #     commit_message: "update: snake graph with axis labels"
-      #   env:
-      #     PERSONAL_TOKEN: ${{ secrets.REPO_WRITE_TOKEN }}
