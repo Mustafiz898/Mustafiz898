@@ -1,29 +1,22 @@
-# ===========================
-# 🐍 Generate Snake Contribution Graph
-# ===========================
 name: Generate Snake
 
 on:
   schedule:
-    # Run daily at midnight
-    - cron: "0 0 * * *"
-
+    - cron: "0 0 * * *" # Run daily at midnight
   workflow_dispatch:
-
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Clone repository
-      - name: Clone repository
+      # 1️⃣ Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2️⃣ Generate Snake SVGs
+      # 2️⃣ Generate snake SVGs (dark & light)
       - name: Generate Snake SVG
         uses: Platane/snk@v3
         id: snake
@@ -35,36 +28,40 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 3️⃣ Add axis labels (months + weekdays)
+      # 3️⃣ Add axis labels safely (inside workspace)
       - name: Add axis labels to SVG
         run: |
           DARK_SVG="dist/github-contribution-grid-snake-dark.svg"
           LIGHT_SVG="dist/github-contribution-grid-snake.svg"
-          TMP="/tmp/snake_tmp.svg"
+          TMP_DARK="dist/snake_dark_tmp.svg"
+          TMP_LIGHT="dist/snake_light_tmp.svg"
 
-          # Copy file to a writable temporary location
-          cp $DARK_SVG $TMP
+          # Make sure dist directory is writable
+          chmod -R 777 dist
 
-          # Add weekday labels (Mon, Wed, Fri)
-          sed '2i <text x="20" y="25" fill="#8b949e" font-size="10">Mon</text>' $TMP > ${TMP}_1 && mv ${TMP}_1 $TMP
-          sed '3i <text x="20" y="40" fill="#8b949e" font-size="10">Wed</text>' $TMP > ${TMP}_1 && mv ${TMP}_1 $TMP
-          sed '4i <text x="20" y="55" fill="#8b949e" font-size="10">Fri</text>' $TMP > ${TMP}_1 && mv ${TMP}_1 $TMP
+          # Add weekday and month labels to DARK SVG
+          awk 'NR==2{
+            print "<text x=\"20\" y=\"25\" fill=\"#8b949e\" font-size=\"10\">Mon</text>";
+            print "<text x=\"20\" y=\"40\" fill=\"#8b949e\" font-size=\"10\">Wed</text>";
+            print "<text x=\"20\" y=\"55\" fill=\"#8b949e\" font-size=\"10\">Fri</text>";
+            print "<text x=\"80\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Nov</text>";
+            print "<text x=\"160\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Dec</text>";
+            print "<text x=\"240\" y=\"15\" fill=\"#8b949e\" font-size=\"10\">Jan</text>";
+          }1' $DARK_SVG > $TMP_DARK
 
-          # Add month labels (manually positioned)
-          sed '5i <text x="80" y="15" fill="#8b949e" font-size="10">Nov</text>' $TMP > ${TMP}_1 && mv ${TMP}_1 $TMP
-          sed '6i <text x="160" y="15" fill="#8b949e" font-size="10">Dec</text>' $TMP > ${TMP}_1 && mv ${TMP}_1 $TMP
-          sed '7i <text x="240" y="15" fill="#8b949e" font-size="10">Jan</text>' $TMP > ${TMP}_1 && mv ${TMP}_1 $TMP
+          # Copy same changes to light version
+          cp $TMP_DARK $TMP_LIGHT
 
-          # Move back to dist and copy for light version
-          mv $TMP $DARK_SVG
-          cp $DARK_SVG $LIGHT_SVG
+          # Replace originals
+          mv -f $TMP_DARK $DARK_SVG
+          mv -f $TMP_LIGHT $LIGHT_SVG
 
-      # 4️⃣ Publish SVGs to output branch
-      - name: Push new files to output branch
+      # 4️⃣ Push new files to output branch
+      - name: Push updated snake files
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
           build_dir: dist
-          commit_message: "update: new snake contribution graph with labels"
+          commit_message: "update: snake contribution graph with labels"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
